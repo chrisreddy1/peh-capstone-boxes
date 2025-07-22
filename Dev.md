@@ -134,6 +134,7 @@ sudo rm $TF
 ```
 
 Got root!
+
 <img width="642" height="316" alt="image" src="https://github.com/user-attachments/assets/f30255df-29b1-441c-8357-6b9f2fe36ed2" />
 
 ---
