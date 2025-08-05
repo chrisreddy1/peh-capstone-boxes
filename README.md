@@ -23,7 +23,7 @@ The [Practical Ethical Hacking](https://academy.tcm-sec.com/p/practical-ethical-
 | [Blackpearl](./Blackpearl.md) | Web-focused Linux box involving DNS enumeration, virtual hosts, and privilege escalation. |
 | [Blue](./Blue.md) | Windows 7 box vulnerable to EternalBlue (MS17-010). Classic SMB exploitation. |
 | [Dev](./Dev.md) | Linux box involving NFS exploitation, archive brute-forcing, LFI, and escalation via GTFObins. |
-| [Jenkins](./Jenkins.md) | Exploitation of Jenkins CI/CD misconfigurations and privilege escalation (if applicable). |
+| [Jenkins](./Jenkins.md) | Exploitation of Jenkins CI/CD misconfigurations and privilege escalation. |
 
 Each `.md` file includes:
 
