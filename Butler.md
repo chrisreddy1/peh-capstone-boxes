@@ -62,6 +62,10 @@ nmap -T4 -p- -A 192.168.88.136
 
 Enumeration identified **port 8080** as open. Accessing the service in a browser revealed a **Jenkins login page**, indicating a potentially accessible CI/CD administration portal.
 
+<img width="693" height="681" alt="image" src="https://github.com/user-attachments/assets/9cc8b478-d4f4-4354-801d-d8cfc8fdc156" />
+
+<img width="1653" height="584" alt="image" src="https://github.com/user-attachments/assets/7f9891fe-dd71-4884-97fe-00e87c444ec6" />
+
 ---
 
 # 2. Jenkins Authentication Assessment
@@ -76,6 +80,14 @@ To further assess authentication security:
 
 The request was then configured for a **cluster bomb attack** to test multiple username and password combinations.
 
+<img width="678" height="776" alt="image" src="https://github.com/user-attachments/assets/8dc5bfc4-5fef-4656-9d41-c16f446c4cfa" />
+
+<img width="694" height="275" alt="image" src="https://github.com/user-attachments/assets/63151a06-347b-4885-8406-6223dac6e09e" />
+
+<img width="448" height="442" alt="image" src="https://github.com/user-attachments/assets/6ff4c6b5-7ada-4b83-9c5e-58a45e1a048c" />
+
+<img width="446" height="441" alt="image" src="https://github.com/user-attachments/assets/d7039ba7-eca0-41fd-a6f8-fff09b42a296" />
+
 ---
 
 # 3. Credential Brute-Force with Burp Intruder
@@ -84,6 +96,8 @@ Burp Intruder results showed one credential pair standing out from the rest base
 
 - Significantly larger response size
 - Absence of the expected `loginError` response
+
+<img width="1466" height="662" alt="image" src="https://github.com/user-attachments/assets/83c71400-768e-4dec-98e0-a911ccdcf23b" />
 
 ### Valid Credentials Identified
 
@@ -120,6 +134,8 @@ nc -nvlp 8044
 ```
 
 After executing the Groovy reverse shell in the Jenkins Script Console, a connection was established.
+
+<img width="536" height="169" alt="image" src="https://github.com/user-attachments/assets/5b3fb48d-11db-4061-8fdc-416977c93485" />
 
 ### Initial Access Obtained As
 
@@ -173,6 +189,8 @@ Permissions: Administrators [Allow: AllAccess]
 Possible DLL Hijacking folder: C:\Program Files (x86)\Wise\Wise Care 365 (Administrators [Allow: AllAccess])
 Command Line: "C:\Program Files (x86)\Wise\Wise Care 365\BootTime.exe"
 ```
+
+<img width="691" height="54" alt="image" src="https://github.com/user-attachments/assets/20130674-025a-4f54-99a8-9213207a7fdb" />
 
 ### Key Observation
 
@@ -247,6 +265,8 @@ When the service restarted, it executed the malicious payload.
 # 12. SYSTEM Access
 
 The listener on port `7777` received a new reverse shell connection.
+
+<img width="531" height="168" alt="image" src="https://github.com/user-attachments/assets/9256f868-3d9d-419d-9782-7856fc138cbb" />
 
 ### Elevated Access Obtained As
 
