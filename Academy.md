@@ -62,13 +62,13 @@ nmap -T4 -A 192.168.88.133
 
 ### Key Findings
 
-<img width="1025" height="738" alt="image" src="https://github.com/user-attachments/assets/949e5ec1-cce5-41c5-a68d-c7b720512a31" />
-
 - **Port 21 (FTP) open**
 - Anonymous FTP login **allowed**
 - A file named **note.txt** present on the FTP share
 
 This misconfiguration allowed unauthenticated users to access files stored on the server.
+
+<img width="1025" height="738" alt="image" src="https://github.com/user-attachments/assets/949e5ec1-cce5-41c5-a68d-c7b720512a31" />
 
 ---
 
