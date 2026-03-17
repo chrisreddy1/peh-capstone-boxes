@@ -62,6 +62,8 @@ nmap -T4 -A 192.168.88.133
 
 ### Key Findings
 
+<img width="1025" height="738" alt="image" src="https://github.com/user-attachments/assets/949e5ec1-cce5-41c5-a68d-c7b720512a31" />
+
 - **Port 21 (FTP) open**
 - Anonymous FTP login **allowed**
 - A file named **note.txt** present on the FTP share
@@ -91,6 +93,8 @@ The connection was successful, and the file **note.txt** was downloaded.
 get note.txt
 ```
 
+<img width="1040" height="377" alt="image" src="https://github.com/user-attachments/assets/b20c5dd8-6c67-40f5-9649-223e5edc8c7f" />
+
 ---
 
 # 3. Sensitive Information Disclosure
@@ -100,6 +104,8 @@ The contents of the file revealed sensitive information related to a student acc
 - Student **registration number**
 - **Password hash**
 - Information indicating that the **registration number is used as the login ID**
+
+<img width="1041" height="311" alt="image" src="https://github.com/user-attachments/assets/0f402364-70c5-4c6a-b9a1-fe9ca01671b0" />
 
 This information provided a potential path to authenticate to a web application.
 
@@ -118,6 +124,8 @@ The tool identified the hash as:
 ```
 MD5
 ```
+
+<img width="938" height="495" alt="image" src="https://github.com/user-attachments/assets/5a1e55d2-2e81-466d-9479-a16d51d7c44f" />
 
 ---
 
@@ -168,6 +176,8 @@ ffuf -u http://192.168.88.133/FUZZ -w /usr/share/wordlists/dirb/common.txt
 
 The **academy** directory appeared to contain the primary web application.
 
+<img width="1032" height="648" alt="image" src="https://github.com/user-attachments/assets/5fabfd93-66f5-4688-9319-296be1b8d47c" />
+
 ---
 
 # 7. Web Application Access
@@ -187,6 +197,8 @@ The login was successful, granting access to the **student account portal**.
 # 8. File Upload Vulnerability
 
 While exploring the application, a **student profile page** was identified that allowed users to **upload a profile photo**.
+
+<img width="1028" height="765" alt="image" src="https://github.com/user-attachments/assets/17ff5453-7aee-44b1-8183-bd2607b94fca" />
 
 This functionality presented a potential opportunity to upload a **malicious file**.
 
@@ -220,6 +232,8 @@ A Netcat listener was started on the attacker machine.
 ```bash
 nc -lvnp 1234
 ```
+
+<img width="1033" height="297" alt="image" src="https://github.com/user-attachments/assets/c81a8747-cc0b-4d00-93d7-02b5c42fa7ab" />
 
 ---
 
@@ -255,6 +269,8 @@ A simple web server was started on the attacker machine.
 python3 -m http.server 8000
 ```
 
+<img width="688" height="205" alt="image" src="https://github.com/user-attachments/assets/ad70fc34-ba3b-43e5-810f-a0fea8c1f555" />
+
 ---
 
 ### Downloading LinPEAS on Target
@@ -267,6 +283,8 @@ chmod +x linpeas.sh
 ./linpeas.sh
 ```
 
+<img width="961" height="827" alt="image" src="https://github.com/user-attachments/assets/28819c95-438d-4051-b553-24b5d66526ad" />
+
 ---
 
 # 13. LinPEAS Findings
@@ -277,6 +295,9 @@ LinPEAS revealed:
 - Located in the directory associated with the **grimmie** user
 - Potential **credential exposure**
 
+<img width="1040" height="478" alt="image" src="https://github.com/user-attachments/assets/684a6d74-3c0d-4288-bfaf-f88db725891c" />
+<img width="1037" height="157" alt="image" src="https://github.com/user-attachments/assets/fa64fb60-03fb-4b83-b639-20af59508a3e" />
+
 ---
 
 # 14. User Enumeration
@@ -286,6 +307,8 @@ The system users were listed using:
 ```bash
 cat /etc/passwd
 ```
+
+<img width="1036" height="740" alt="image" src="https://github.com/user-attachments/assets/cdb7bc5a-86c5-46d4-9c57-a5ff39e5adc4" />
 
 The user **grimmie** appeared relevant because the script was located in that user's directory.
 
@@ -298,6 +321,8 @@ Using the credentials discovered during enumeration, SSH access was attempted.
 ```bash
 ssh grimmie@192.168.88.133
 ```
+
+<img width="980" height="437" alt="image" src="https://github.com/user-attachments/assets/02400bf8-82d6-41f0-b8cc-0efe51ab5faf" />
 
 The login was successful, granting a shell as:
 
@@ -344,6 +369,8 @@ After transferring and executing the tool, it revealed that:
 
 This presented a **privilege escalation opportunity**.
 
+<img width="1007" height="100" alt="image" src="https://github.com/user-attachments/assets/d3a3a0ba-2dfe-41dd-b339-5e5ef30c6782" />
+
 ---
 
 # 18. Privilege Escalation
@@ -375,6 +402,8 @@ root
 ```
 
 This confirmed **successful privilege escalation to root**.
+
+<img width="958" height="493" alt="image" src="https://github.com/user-attachments/assets/94c13ae7-a115-4a74-a176-5ae8aa1c367c" />
 
 ---
 
