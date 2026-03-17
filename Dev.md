@@ -92,6 +92,8 @@ Navigating to the web server revealed useful information.
 Bolt - Installation Error
 ```
 
+<img width="1641" height="674" alt="image" src="https://github.com/user-attachments/assets/2afd141e-8203-425d-a155-4b189ee32863" />
+
 This suggested that the web server was running **BoltWire CMS** and that the application was **misconfigured or incomplete**.
 
 ---
@@ -118,11 +120,9 @@ This provided useful insight into the underlying environment.
 
 Further enumeration was performed using **FFUF**.
 
-### Command Used
+<img width="1078" height="732" alt="image" src="https://github.com/user-attachments/assets/adad970f-31ed-4568-bf89-4a3f1ce42258" />
 
-```bash
-ffuf -u http://192.168.88.134/FUZZ -w /usr/share/wordlists/dirb/common.txt
-```
+<img width="1085" height="683" alt="image" src="https://github.com/user-attachments/assets/041497c3-a64e-466e-b427-84fdbdc4eb26" />
 
 ### Discovered Directories
 
@@ -160,6 +160,8 @@ showmount -e 192.168.88.134
 /srv/nfs
 ```
 
+<img width="397" height="68" alt="image" src="https://github.com/user-attachments/assets/11f83df4-1218-42e8-b2e3-87d810ce1d48" />
+
 ---
 
 # 5. Mounting the NFS Share
@@ -192,6 +194,8 @@ Attempting to extract the archive prompted for a password.
 unzip save.zip
 ```
 
+<img width="457" height="107" alt="image" src="https://github.com/user-attachments/assets/bc70c93e-a2ce-456f-b65c-f935fea038bd" />
+
 To crack the password, **fcrackzip** was installed.
 
 ```bash
@@ -201,10 +205,12 @@ apt install fcrackzip
 ### Cracking the Archive Password
 
 ```bash
-fcrackzip -u -D -p /usr/share/wordlists/rockyou.txt save.zip
+fcrackzip -v -u -D -p /usr/share/wordlists/rockyou.txt save.zip
 ```
 
 The password was successfully recovered, allowing extraction of the archive.
+
+<img width="558" height="120" alt="image" src="https://github.com/user-attachments/assets/4895484d-afcf-4f46-aeaa-c300d197905f" />
 
 ---
 
@@ -217,7 +223,11 @@ todo.txt
 id_rsa
 ```
 
+<img width="225" height="173" alt="image" src="https://github.com/user-attachments/assets/34126557-9cbb-4265-8562-5f7a61c2b594" />
+
 The **todo.txt** file contained a short note signed with the initials **JP**.
+
+<img width="629" height="129" alt="image" src="https://github.com/user-attachments/assets/343d7872-9512-4a6b-99e1-3ea5c2c926f7" />
 
 Although limited in information, it suggested a potential user identity.
 
@@ -230,6 +240,8 @@ While reviewing directory enumeration results, the following path was explored:
 ```
 /app/config/config.yml
 ```
+
+<img width="1322" height="370" alt="image" src="https://github.com/user-attachments/assets/63219789-e1fb-4a23-8894-16f6e629e517" />
 
 This configuration file contained **application credentials**, including a **username and password**.
 
@@ -244,6 +256,8 @@ http://192.168.88.134:8080/dev
 ```
 
 Displayed a **BoltWire landing page**.
+
+<img width="691" height="318" alt="image" src="https://github.com/user-attachments/assets/a94c7dbe-2343-4178-b76c-63b8e47ec252" />
 
 Research revealed a known **Local File Inclusion vulnerability** affecting BoltWire.
 
@@ -271,6 +285,10 @@ This successfully returned the contents of:
 /etc/passwd
 ```
 
+<img width="694" height="566" alt="image" src="https://github.com/user-attachments/assets/8640ce7d-1e42-41b3-b003-569be5e04293" />
+
+<img width="693" height="516" alt="image" src="https://github.com/user-attachments/assets/afeae3bb-f4d2-4520-8384-b34913a89af3" />
+
 ---
 
 # 11. User Identification
@@ -292,10 +310,12 @@ id_rsa
 An SSH connection was attempted.
 
 ```bash
-ssh jeanpaul@192.168.88.134 -i id_rsa
+ssh -i id_rsa jeanpaul@192.168.88.134 
 ```
 
 The password discovered in `config.yml` was used, resulting in **successful SSH access**.
+
+<img width="595" height="268" alt="image" src="https://github.com/user-attachments/assets/bb47c620-4532-4d76-8c15-d2df83b8ff17" />
 
 ---
 
@@ -310,8 +330,10 @@ sudo -l
 Result:
 
 ```
-(ALL) NOPASSWD: /usr/bin/zip
+(root) NOPASSWD: /usr/bin/zip
 ```
+
+<img width="691" height="82" alt="image" src="https://github.com/user-attachments/assets/e5c9b297-57c2-4176-8cff-cbc288983d26" />
 
 The user was allowed to run **zip as root without a password**.
 
@@ -350,6 +372,8 @@ root
 ```
 
 This confirmed **full system compromise**.
+
+<img width="430" height="225" alt="image" src="https://github.com/user-attachments/assets/6559ff5e-8038-4f79-958f-01d918cd40cc" />
 
 ---
 
